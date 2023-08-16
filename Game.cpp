@@ -13,6 +13,7 @@ void Game::initVariables() {
 		this->_window.getWindSize().x / this->_window.getObjectSize(), 
 		this->_window.getWindSize().y / this->_window.getObjectSize() };
 
+	cout << "GridSize : W[" << this->_windSize.x << "] | H[" << this->_windSize.y << "]" << endl;
 
 }
 
@@ -69,13 +70,30 @@ void Game::drawBorder() {
 
 }
 
+void Game::drawSnake(){
+	vector<SnakeSegment> tempSnakeBody = this->_snake.getSnakeBody();
+	
+	for (auto& snakePart : tempSnakeBody) {
+		if (snakePart.position.x == 0 && snakePart.position.y == 0) {
+			this->_snake.setPositionShape(sf::Vector2f(
+				this->getMiddleWindSize().x * this->_window.getObjectSize(),
+				this->getMiddleWindSize().y * this->_window.getObjectSize()));
+
+			this->_window.draw(this->_snake.getSnakeShape());
+		}
+	}
+}
+
 Game::~Game(){}
 
 Window* Game::getWindow() { return& this->_window; }
+sf::Vector2u Game::getWindSizeGrid() { return this->_windSize; }
+sf::Vector2i Game::getMiddleWindSize() { return sf::Vector2i(this->getWindSizeGrid().x / 2, this->getWindSizeGrid().y / 2); }
 
 void Game::render() {
 	this->_window.clear();
 	this->drawBorder();
+	this->drawSnake();
 	this->_window.display();
 }
 

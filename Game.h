@@ -12,6 +12,9 @@ class Game{
 		Game(const std::string l_title = "No Title", const sf::Vector2u l_size = { 800, 600 });
 		~Game();
 		Window* getWindow();
+		sf::Vector2u getWindSizeGrid();
+		sf::Vector2i getMiddleWindSize();
+
 
 		void update(); // update positions (game logic)
 		void render(); // update the renders
@@ -21,6 +24,7 @@ class Game{
 		void initBorderRender();
 		void initVariables();
 		void drawBorder();
+		void drawSnake();
 
 		sf::Vector2u _windSize;
 
