@@ -21,6 +21,11 @@ void Game::initVariables() {
 	this->_snake.getSnakeBody().push_back(SnakeSegment(this->_windSize.x / 2, this->_windSize.y / 2)); // Head Snake
 
 	this->_delay = 0.2f;
+	this->_score = 0;
+
+	// Fruit
+	this->_fruit.randomPosition(this->_windSize);
+
 
 }
 
@@ -105,6 +110,37 @@ void Game::drawFPS() {
 
 }
 
+void Game::drawScore() {
+	sf::Font t_font;
+
+	if (t_font.loadFromFile("./Font/Ruwudu-Medium.ttf")) {
+		sf::Text t_scoreText;
+
+		t_scoreText.setFont(t_font);
+		t_scoreText.setString("Score: " + to_string(this->_score));
+		t_scoreText.setCharacterSize(24);
+
+		t_scoreText.setPosition(this->_window.getWindSize().x / 2, 0);
+
+		this->_window.draw(t_scoreText);
+	}
+
+}
+
+
+void Game::drawFruit() {
+	if(this->_snake.getPosition().x == this->_fruit.getPosition().x &&
+		this->_snake.getPosition().y == this->_fruit.getPosition().y) 
+	{
+		this->_fruit.randomPosition(this->_windSize);
+		this->_score += 10;
+
+		cout << "+" << this->_score << endl;
+	}
+
+	this->_window.draw(this->_fruit.getSprite());
+}
+
 Game::~Game(){}
 
 Window* Game::getWindow() { return& this->_window; }
@@ -115,10 +151,13 @@ bool Game::isRunning() { return !this->_end; }
 
 void Game::render() {
 	this->_window.clear();
+	this->drawSnake();
+
 	this->drawBorder();
 	this->drawFPS();
+	this->drawScore();
+	this->drawFruit();
 
-	this->drawSnake();
 	this->_window.display();
 }
 
@@ -161,10 +200,11 @@ void Game::checkDirectionKey() {
 }
 
 bool Game::checkCollision() {
-	
 	if (this->_snake.getPosition().x  <= 0 || 
 		this->_snake.getPosition().x >= this->_windSize.x || 
 		this->_snake.getPosition().y <= 0 ||
-		this->_snake.getPosition().x >= this->_windSize.y) { return true; }
+		this->_snake.getPosition().y >= this->_windSize.y) {
+		return true; cout << "Border Touched! " << endl;
+	}
 return false;
 }

@@ -4,6 +4,7 @@
 
 #include "Window.h"
 #include "Snake.h"
+#include "Fruit.h"
 
 #include <vector>
 
@@ -30,6 +31,8 @@ class Game{
 		bool checkCollision();
 
 		void drawFPS();
+		void drawScore();
+		void drawFruit();
 
 		void checkDirectionKey();
 
@@ -38,12 +41,16 @@ class Game{
 
 		Window _window;
 		Snake _snake;
+		Fruit _fruit;
+
 		sf::RectangleShape _borderSide[4];
 
 		sf::Clock _clock;
 		sf::Time _dt;
 		sf::Time _movementTimer;
 		float _delay;
+
+		unsigned int _score;
 
 		bool _end;
 
