@@ -5,6 +5,7 @@
 #include "SFML/Graphics.hpp"
 
 #include <vector>
+#include <iostream>
 
 enum Direction{None, Top, Down, Right, Left};
 
@@ -22,12 +23,18 @@ class Snake{
 		std::vector<SnakeSegment>& getSnakeBody();
 		sf::Drawable& getSnakeShape();
 
-		void setDirection(Direction& l_newDir);
+		sf::Vector2i getPosition();
+
+		void setDirection(Direction l_newDir);
 		void setPositionShape(sf::Vector2f l_positionSnakePart);
+
+		void tick(sf::Time& t_dt);
 
 	private:
 		unsigned int _gridSize;
 		Direction _dir;
+
+		void move();
 
 		std::vector<SnakeSegment> _snakeBody;
 		sf::RectangleShape _snakeShape;

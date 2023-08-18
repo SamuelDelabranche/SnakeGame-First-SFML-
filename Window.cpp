@@ -11,13 +11,16 @@ void Window::initVariables(const string l_title, const sf::Vector2u l_size) {
 	this->_title = l_title;
 	this->_gameObjectSize = 32;
 
+
 	windowSizeAdapter();
-	_window.create({_windSize.x, _windSize.y}, _title, sf::Style::Titlebar | sf::Style::Close);
+	this->_window.create({_windSize.x, _windSize.y}, _title, sf::Style::Titlebar | sf::Style::Close);
 
 	this->_isDone = false;
+
+	this->_window.setVerticalSyncEnabled(false);
 }
 
-void Window::windowSizeAdapter() {
+void Window::windowSizeAdapter() {	
 	struct checkSize { checkSize(): _w(false), _h(false){} 
 		bool _w, _h;
 	};
@@ -57,10 +60,10 @@ void Window::pollEvents(sf::Event& l_event) {
 	while (_window.pollEvent(l_event)) {
 		if (l_event.type == sf::Event::Closed) { this->_isDone = true; }
 	}
+
 }
+
 
 void Window::draw(const sf::Drawable& l_object) { this->_window.draw(l_object); }
 void Window::clear() { this->_window.clear(sf::Color::Black); }
 void Window::display() { this->_window.display(); }
-
-

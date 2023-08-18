@@ -4,6 +4,7 @@
 
 #include "SFML/Graphics.hpp"
 
+
 #include <string>
 #include <iostream>
 
@@ -25,6 +26,7 @@ class Window{
 		void printElement(const std::string& element) const ;
 
 
+
 	private:
 		void initVariables(const std::string l_title, const sf::Vector2u l_size);
 		void destroy();
@@ -32,6 +34,7 @@ class Window{
 		void windowSizeAdapter();
 
 		void pollEvents(sf::Event& l_event);
+
 
 		sf::RenderWindow _window;
 

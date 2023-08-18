@@ -5,6 +5,7 @@ int main() {
 	while (!(game.getWindow()->isDone())) { // is Game working
 		game.update(); // update game ( characters.. )
 		game.render(); // set render to characters.. )
+
 	}
 
 	return 0;

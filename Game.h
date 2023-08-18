@@ -18,6 +18,7 @@ class Game{
 
 		void update(); // update positions (game logic)
 		void render(); // update the renders
+		bool isRunning();
 
 
 	private:
@@ -26,11 +27,26 @@ class Game{
 		void drawBorder();
 		void drawSnake();
 
+		bool checkCollision();
+
+		void drawFPS();
+
+		void checkDirectionKey();
+
+
 		sf::Vector2u _windSize;
 
 		Window _window;
 		Snake _snake;
 		sf::RectangleShape _borderSide[4];
+
+		sf::Clock _clock;
+		sf::Time _dt;
+		sf::Time _movementTimer;
+		float _delay;
+
+		bool _end;
+
 
 
 };
